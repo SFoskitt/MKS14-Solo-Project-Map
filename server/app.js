@@ -56,10 +56,6 @@ app.post('/', function (req, res) {
 	  console.log("result from server post", data);
 	});
 	
-	// res.end();
 });
 
 }
-	  // query.on("end", function (result) { 
-	  //   client.end(); 
-	  //   res.send(result); 
