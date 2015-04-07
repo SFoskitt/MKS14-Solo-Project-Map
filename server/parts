@@ -1,0 +1,57 @@
+var express = require('express')(); // inline invocation
+var bodyParser = require('body-parser')
+
+express.use( bodyParser.json() );       // to support JSON-encoded bodies
+express.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
+
+// set view engine to jade
+express.set('view engine', 'jade');
+
+// set views for error & 404 pages
+express.set('views', __dirname + '/views');
+
+express.get('/', function (req, res) {
+  res.send('Hello, world!');
+});
+
+express.post('/nick', function (req, res) {
+  // receive the zipcode inside req.body and then send it to the db to be searched for.
+});
+
+
+		send: function(data){
+			$.ajax({
+			  url: app.server,
+			  type: 'POST',
+			  data: JSON.stringify(data),
+			  contentType: 'application/json',
+			  success: function (data) {
+			  	app.fetch()
+			    console.log('chatterbox: Message sent');
+			  },
+			  error: function (data) {
+			    console.error('chatterbox: Failed to send message');
+			  }
+			});
+		},
+
+		fetch: function(){
+			$.ajax({
+			  url: app.server,
+			  type: 'GET',
+			  data: {'order': '-createdAt'},
+			  contentType: 'application/json',
+			  success: function (data) {
+			  	console.log(data)
+			    
+			  	app.populateMessages(data)
+			  	app.populateRooms(data)
+			  
+			  },
+			  error: function (data) {
+			    console.error('chatterbox: Failed to retrieve');
+			  }
+			});
+		},
